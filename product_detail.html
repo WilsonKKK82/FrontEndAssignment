@@ -11,14 +11,17 @@
 <body>
     <section id="header">
         <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+
         <div>
             <ul id="navBar">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li id="cart"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
                 <li id="authNavItem"></li>
                 <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+                <li><a href="user.html">Account</a></li>
             </ul>
         </div>
         <div id="mobile">
@@ -69,12 +72,12 @@
         </div>
     </section>
 
-    <footer class="section-p1">
+   <footer class="section-p1">
         <div class="col">
             <h4>Contact</h4>
             <p><strong>Address: </strong> Jalan Universiti, Bandar Barat 31900 Kampar, Perak Malaysia</p>
-            <p><strong>Phone:</strong> +6015 2223345 / +05 28105</p>
-            <p><strong>Hours:</strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <p><strong>Phone: </strong> +6015 2223345 / +05 28105 </p>
+            <p><strong>Hours: </strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
             <div class="follow">
                 <h4>Follow us</h4>
                 <div class="icon">
@@ -84,23 +87,27 @@
                 </div>
             </div>
         </div>
+
         <div class="col">
             <h4>About</h4>
             <a href="about.html">About us</a>
             <a href="#">Terms & Conditions</a>
             <a href="#">Delivery Information</a>
             <a href="#">Privacy Policy</a>
+
         </div>
+
         <div class="col install">
             <h4>Install App</h4>
             <p>from App Store or Google Play</p>
             <div class="row">
-                <img src="img/pay/app.png" alt="">
+                <img src="img/pay/app.png  " alt="">
                 <img src="img/pay/play.png" alt="">
             </div>
             <p>Secured Payment Gateways</p>
             <img src="img/pay/pay.png" alt="">
         </div>
+
         <div class="copyright">
             <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
         </div>
@@ -108,6 +115,7 @@
 
     <script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
     <script src="cartIndicator.js" defer></script>
+    <script src="header.js" defer></script>
     <script>
         // Get product ID from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -239,6 +247,4 @@
         fetchProduct();
     </script>
 </body>
-
 </html>
-

@@ -8,8 +8,8 @@ function updateCartIndicator() {
             indicator.className = "cart-indicator";
             cartIcon.appendChild(indicator);
         }
-        indicator.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        indicator.textContent = cart.reduce((sum, item) => sum + item.quantity, 0); // Total quantity
     } else if (cart.length === 0 && indicator) {
         indicator.remove();
-    }
+    }
 }

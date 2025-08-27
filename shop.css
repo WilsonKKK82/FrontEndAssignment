@@ -214,3 +214,47 @@
         flex: 0 0 18%;
     }
 }
+
+/* Reinforce Cart Indicator Styling */
+#cart {
+    position: relative;
+}
+
+#cart a {
+    color: #333; /* Cart icon color */
+    text-decoration: none;
+}
+
+#cart .cart-indicator {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #dc3545; /* Red circle */
+    color: white; /* White text */
+    font-size: 10px; /* Smaller than cart icon */
+    padding: 2px 5px; /* Compact size */
+    border-radius: 10px; /* Circular shape */
+    display: block;
+}
+
+/* Reinforce Cart Indicator Styling */
+#header #cart {
+    position: relative;
+}
+
+#header #cart a {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+#header #cart .cart-indicator {
+    position: absolute !important;
+    top: -5px !important;
+    right: -10px !important;
+    background-color: #dc3545 !important;
+    color: white !important;
+    font-size: 10px !important;
+    padding: 2px 5px !important;
+    border-radius: 10px !important;
+    display: block !important;
+}

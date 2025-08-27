@@ -57,15 +57,11 @@
         background-position: 40%;
     }
 
-    #product1 .pro-container {
-        justify-content: center !important;
-    }
-
     #product1 .pro {
         width: 100%;
+
     }
 }
-
 /* Header stops */
 
 
@@ -159,7 +155,6 @@
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
     margin: 15px 0;
     transition: 0.2s ease;
-    text-align: center;
 }
 
 #product1 .pro img {

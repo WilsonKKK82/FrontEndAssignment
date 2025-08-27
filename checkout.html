@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Niku Shoes</title>
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="Header_Footer.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="cart.html">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+
+        <div>
+            <ul id="navBar">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="cart"><a class="active" href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+                <li id="authNavItem"></li>
+                <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+                <li><a href="user.html">Account</a></li>
+
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <section class="checkout-section section-p1">
+        <div class="checkout-container">
+            <div class="checkout-progress">
+                <div class="progress-step active">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Shipping</span>
+                </div>
+                <div class="progress-step">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Payment</span>
+                </div>
+                <div class="progress-step">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Review</span>
+                </div>
+            </div>
+
+            <div class="checkout-content">
+                <div class="checkout-forms">
+                    <form class="checkout-form active" id="shipping-form">
+                        <h2>Shipping Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address *</label>
+                            <input type="text" placeholder="Street address" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City *</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Postal Code *</label>
+                                <input type="text" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>State *</label>
+                            <select required>
+                                <option value="">Select State</option>
+                                <option value="penang">Penang</option>
+                                <option value="kl">Kuala Lumpur</option>
+                                <option value="johor">Johor</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="save-address">
+                                Save this address for future orders
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                                <a href="cart.html" class="btn-back">Back to Cart</a>
+                                <button type="button" class="btn-next" onclick="nextStep('payment')">
+                                    Continue to Payment
+                            </button>
+                        </div>
+                    </form>
+
+                    <form class="checkout-form" id="payment-form">
+                        <h2>Payment Method</h2>
+                        
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment-method" value="credit-card" checked>
+                                <div class="payment-content">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Credit/Debit Card</span>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment-method" value="paypal">
+                                <div class="payment-content">
+                                    <i class="fab fa-paypal"></i>
+                                    <span>PayPal</span>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment-method" value="bank-transfer">
+                                <div class="payment-content">
+                                    <i class="fas fa-university"></i>
+                                    <span>Bank Transfer</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="credit-card-form">
+                            <div class="form-group">
+                                <label>Card Number *</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Expiry Date *</label>
+                                    <input type="text" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV *</label>
+                                    <input type="text" placeholder="123" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Cardholder Name *</label>
+                                <input type="text" required>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-back" onclick="prevStep('shipping')">
+                                Back to Shipping
+                            </button>
+                            <button type="button" class="btn-next" onclick="nextStep('review')">
+                                Review Order
+                            </button>
+                        </div>
+                    </form>
+
+                    <form class="checkout-form" id="review-form">
+                        <h2>Order Review</h2>
+                        
+                        <div class="order-summary">
+                            <div class="summary-section">
+                                <h4>Shipping Address</h4>
+                                <p id="review-shipping-address">Loading...</p>
+                            </div>
+
+                            <div class="summary-section">
+                                <h4>Payment Method</h4>
+                                <p id="review-payment-method">Loading...</p>
+                            </div>
+
+                            <div class="summary-section">
+                                <h4>Order Items</h4>
+                                <div class="review-items" id="review-items">
+                                    <!-- Items will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-back" onclick="prevStep('payment')">
+                                Back to Payment
+                            </button>
+                            <button type="submit" class="btn-place-order">
+                                Place Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="order-summary-sidebar">
+                    <h3>Order Summary</h3>
+                    
+                    <div class="order-items" id="checkout-items">
+                        <!-- Items will be populated dynamically -->
+                    </div>
+
+                    <div class="order-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">RM0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping</span>
+                            <span id="shipping">RM0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Tax</span>
+                            <span id="tax">RM0.00</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total</span>
+                            <span id="grand-total">RM0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-code">
+                        <input type="text" placeholder="Enter promo code">
+                        <button type="button">Apply</button>
+                    </div>
+
+                    <div class="security-badges">
+                        <div class="security-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        <div class="security-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>SSL Encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> Jalan Universiti, Bandar Barat 31900 Kampar, Perak Malaysia</p>
+            <p><strong>Phone: </strong> +6015 2223345 / +05 28105 </p>
+            <p><strong>Hours: </strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>from App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.png  " alt="">
+                <img src="img/pay/play.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
+    <script src="cartIndicator.js" defer></script>
+    <script src="header.js" defer></script>
+    <script src="checkout.js"></script>
+</body>
+</html>

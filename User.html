@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Niku Shoes</title>
+    <link rel="stylesheet" href="User.css">
+    <link rel="stylesheet" href="Header_Footer.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+
+        <div>
+            <ul id="navBar">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="cart"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+                <li id="authNavItem"></li>
+                <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+                <li><a class="active" href="user.html">Account</a></li>
+
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <section class="user-dashboard section-p1">
+        <div class="dashboard-container">
+            <div class="dashboard-sidebar">
+                <div class="user-profile">
+                    <img src="img/user-avatar.jpg" alt="User Avatar" class="user-avatar" id="user-avatar-img">
+                    <h3 id="user-display-name">Guest User</h3>
+                    <p id="user-email">guest@example.com</p>
+                </div>
+                <nav class="dashboard-nav">
+                    <a href="#profile" class="nav-item active" data-section="profile"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#orders" class="nav-item" data-section="orders"><i class="fas fa-shopping-bag"></i> Orders</a>
+                    <a href="#addresses" class="nav-item" data-section="addresses"><i class="fas fa-map-marker-alt"></i> Addresses</a>
+                    <a href="#wishlist" class="nav-item" data-section="wishlist"><i class="fas fa-heart"></i> Wishlist</a>
+                    <a href="#settings" class="nav-item" data-section="settings"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="logout.html" class="nav-item logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </nav>
+            </div>
+
+            <div class="dashboard-content">
+                <div id="profile" class="content-section active">
+                    <h2>Personal Information</h2>
+                    <form class="profile-form" id="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name *</label>
+                                <input type="text" id="first-name" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name *</label>
+                                <input type="text" id="last-name" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-email-input">Email *</label>
+                            <input type="email" id="user-email-input" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-phone">Phone Number</label>
+                            <input type="tel" id="user-phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-avatar">Profile Picture</label>
+                            <input type="file" id="user-avatar" name="avatar" accept="image/*">
+                        </div>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </form>
+                </div>
+
+                <div id="orders" class="content-section">
+                    <h2>Order History</h2>
+                    <div class="orders-list" id="orders-list">
+                        <div class="no-orders">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h3>No orders yet</h3>
+                            <p>Your order history will appear here</p>
+                            <a href="shop.html" class="btn-primary">Start Shopping</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="addresses" class="content-section">
+                    <h2>Saved Addresses</h2>
+                    <div class="addresses-grid" id="addresses-grid">
+                        <div class="no-addresses">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>No addresses saved</h3>
+                            <p>Add your first address to make checkout easier</p>
+                        </div>
+                    </div>
+                    <button class="add-address-btn" id="add-address-btn">
+                        <i class="fas fa-plus"></i> Add New Address
+                    </button>
+
+                    <div class="address-form-container" id="address-form-container" style="display: none;">
+                        <h3>Add New Address</h3>
+                        <form id="address-form">
+                            <div class="form-group">
+                                <label for="address-title">Address Title *</label>
+                                <input type="text" id="address-title" name="title" placeholder="Home, Work, etc." required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="address-first-name">First Name *</label>
+                                    <input type="text" id="address-first-name" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-last-name">Last Name *</label>
+                                    <input type="text" id="address-last-name" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address-street">Street Address *</label>
+                                <input type="text" id="address-street" name="street" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="address-city">City *</label>
+                                    <input type="text" id="address-city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-state">State *</label>
+                                    <select id="address-state" name="state" required>
+                                        <option value="">Select State</option>
+                                        <option value="Kuala Lumpur">Kuala Lumpur</option>
+                                        <option value="Selangor">Selangor</option>
+                                        <option value="Penang">Penang</option>
+                                        <option value="Johor">Johor</option>
+                                        <option value="Sabah">Sabah</option>
+                                        <option value="Sarawak">Sarawak</option>
+                                        <option value="Perak">Perak</option>
+                                        <option value="Melaka">Melaka</option>
+                                        <option value="Negeri Sembilan">Negeri Sembilan</option>
+                                        <option value="Pahang">Pahang</option>
+                                        <option value="Kedah">Kedah</option>
+                                        <option value="Kelantan">Kelantan</option>
+                                        <option value="Terengganu">Terengganu</option>
+                                        <option value="Perlis">Perlis</option>
+                                        <option value="Labuan">Labuan</option>
+                                        <option value="Putrajaya">Putrajaya</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="address-postcode">Postcode *</label>
+                                    <input type="text" id="address-postcode" name="postcode" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-phone">Phone Number *</label>
+                                    <input type="tel" id="address-phone" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="address-default" name="default">
+                                    Set as default address
+                                </label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" id="cancel-address-btn">Cancel</button>
+                                <button type="submit" class="btn-primary">Save Address</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="wishlist" class="content-section">
+                    <h2>Your Wishlist</h2>
+                    <div class="wishlist-grid" id="wishlist-grid">
+                        <div class="no-wishlist">
+                            <i class="fas fa-heart"></i>
+                            <h3>Your wishlist is empty</h3>
+                            <p>Save items you love for later</p>
+                            <a href="shop.html" class="btn-primary">Browse Products</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings" class="content-section">
+                    <h2>Account Settings</h2>
+                    <div class="settings-options">
+                        <div class="setting-item">
+                            <h4>Change Password</h4>
+                            <button class="change-password-btn" id="change-password-btn">Change Password</button>
+
+                            <div class="password-form-container" id="password-form-container" style="display: none;">
+                                <form id="password-form">
+                                    <div class="form-group">
+                                        <label for="current-password">Current Password *</label>
+                                        <input type="password" id="current-password" name="currentPassword" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-password">New Password *</label>
+                                        <input type="password" id="new-password" name="newPassword" required>
+                                        <div class="password-strength" id="password-strength"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm-password">Confirm New Password *</label>
+                                        <input type="password" id="confirm-password" name="confirmPassword" required>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="button" class="btn-secondary" id="cancel-password-btn">Cancel</button>
+                                        <button type="submit" class="btn-primary">Update Password</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <h4>Notification Preferences</h4>
+                            <label class="switch">
+                                <input type="checkbox" id="email-notifications" checked>
+                                <span class="slider"></span>
+                                Email Notifications
+                            </label>
+                            <label class="switch">
+                                <input type="checkbox" id="sms-notifications">
+                                <span class="slider"></span>
+                                SMS Notifications
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <h4>Account Privacy</h4>
+                            <button class="privacy-btn" id="privacy-btn">Manage Privacy</button>
+                        </div>
+                        <div class="setting-item danger-zone">
+                            <h4>Danger Zone</h4>
+                            <button class="delete-account-btn" id="delete-account-btn">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> Jalan Universiti, Bandar Barat 31900 Kampar, Perak Malaysia</p>
+            <p><strong>Phone: </strong> +6015 2223345 / +05 28105 </p>
+            <p><strong>Hours: </strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>from App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.png  " alt="">
+                <img src="img/pay/play.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
+    <script src="cartIndicator.js"></script>
+    <script src="header.js" defer></script>
+    <script src="user.js"></script>
+    
+</body>
+</html>

@@ -197,14 +197,13 @@ a {
         font-size: 24px  ;
     }
 
-    #cart {
-        display: none;
-    }
+
+}
 
     .section-p1 {
         padding: 40px 40px;
     }
-}
+
 
 @media (max-width: 477px) {
     .section-p1 {
@@ -293,3 +292,26 @@ footer .copyright {
 }
 
 /* Footer Styling Ends */
+
+
+/* Cart Indicator Styling */
+#cart {
+    position: relative;
+}
+
+#cart a {
+    color: #333; /* Cart icon color */
+    text-decoration: none;
+}
+
+#cart .cart-indicator {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #dc3545; /* Red circle */
+    color: white; /* White text inside */
+    font-size: 10px; /* Smaller than the cart icon */
+    padding: 2px 5px; /* Keeps it compact */
+    border-radius: 10px; /* Circular shape */
+    display: block;
+}
