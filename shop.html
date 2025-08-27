@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="Header_Footer.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+</header>
+
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+
+        <div>
+            <ul id="navBar">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="cart"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <!-- new add in start -->
+                <li id="authNavItem"></li>
+                <!-- This will be dynamically populated by JavaScript -->
+                <!-- new add in end -->
+                <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <section id="page-header">
+        <h2>#Step Into Style</h2>
+        <p>Run Further. Live Better.</p>
+    </section>
+
+    <section id="product-list" class="section-p1">
+        <div class="filter-container">
+            <h2>Filter by Category:</h2>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="Running" onchange="filterProducts()"> Running</label>
+                <label><input type="checkbox" value="Casual" onchange="filterProducts()"> Casual</label>
+                <label><input type="checkbox" value="Basketball" onchange="filterProducts()"> Basketball</label>
+                <label><input type="checkbox" value="Football" onchange="filterProducts()"> Football</label>
+            </div>
+        </div>
+        <div class="product-list-container" id="product-list-container">
+            <!-- Product cards will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> 450A Jalan Berjaya Lorong 32 Penang, 31010 Malaysia</p>
+            <p><strong>Phone: </strong> +6015 2223345 / +05 28105 </p>
+            <p><strong>Hours: </strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>from App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.png  " alt="">
+                <img src="img/pay/play.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
+        </div>
+    </footer>
+</body>
+
+<script src="header.js" defer></script>
+<script src="cartIndicator.js" defer></script>
+<script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
+<script>
+
+    // Get category from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = urlParams.get("category");
+
+    // Store products globally
+    let allProducts = [];
+
+    // Initialize checkbox states based on URL
+    function initializeCheckboxes() {
+        const checkboxes = document.querySelectorAll(".checkbox-group input[type='checkbox']");
+        if (initialCategory) {
+            checkboxes.forEach(checkbox => {
+                if (checkbox.value === initialCategory) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+    }
+
+    // Fetch and display products
+    async function fetchProducts() {
+        console.log("Starting fetch for products.json");
+        try {
+            const response = await fetch('products.json');
+            console.log("Fetch response:", response);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            allProducts = await response.json();
+            console.log("Parsed products:", allProducts);
+            console.log("Number of products:", allProducts.length);
+            initializeCheckboxes();
+            filterProducts();
+        } catch (error) {
+            console.error("Error fetching products.json:", error);
+            let errorMessage = "Error loading products.";
+            if (error.message.includes("Failed to fetch")) {
+                errorMessage = "Cannot find products.json. Check file path or server.";
+            } else if (error.message.includes("SyntaxError")) {
+                errorMessage = "Invalid JSON in products.json. Check syntax.";
+            }
+            document.getElementById("product-list-container").innerHTML = `<p>${errorMessage} Please check the console for details.
+</p>`;
+        }
+    }
+
+    // Filter and render products
+    function filterProducts() {
+        const checkboxes = document.querySelectorAll(".checkbox-group input[type='checkbox']:checked");
+        const selectedCategories = Array.from(checkboxes).map(cb => cb.value);
+        console.log("Selected categories:", selectedCategories);
+
+        const container = document.getElementById("product-list-container");
+        if (!container) {
+            console.error("Product list container not found");
+            return;
+        }
+
+        const filteredProducts = selectedCategories.length > 0
+            ? allProducts.filter(p => selectedCategories.includes(p.category))
+            : allProducts;
+        console.log("Filtered products:", filteredProducts);
+        console.log("Number of filtered products:", filteredProducts.length);
+
+        if (filteredProducts.length === 0) {
+            console.log("No products match the selected categories");
+            container.innerHTML = "<p>No products found for the selected categories.</p>";
+            return;
+        }
+
+        container.innerHTML = filteredProducts.map(p => `
+<div class="product-card">
+    <img src="${p.image}" alt="${p.name}">
+    <div class="product-title">${p.name}</div>
+    <div class="product-brand">${p.brand}</div>
+    <div class="product-price">RM${p.price.toFixed(2)}</div>
+    <div class="product-rating">${"★".repeat(p.rating) + "☆".repeat(5 - p.rating)}</div>
+    <a href="product_detail.html?id=${p.id}" class="cart-button">View More</a>
+</div>
+`).join("");
+
+        // Update URL without reloading
+        const newUrl = selectedCategories.length === 1 ? `shop.html?category=${selectedCategories[0]}` : 'shop.html';
+        history.pushState({}, '', newUrl);
+    }
+
+    // Initialize page
+    console.log("Initializing shop.html");
+    fetchProducts();
+
+</script>
+
+</html>

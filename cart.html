@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Niku Shoes</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="Header_Footer.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+        <div>
+            <ul id="navBar">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="cart"><a class="active" href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li id="authNavItem"></li>
+                <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <section id="cart" class="section-p1">
+        <h2>Your Cart</h2>
+        <div class="cart-container">
+            <div class="cart-items" id="cart-items"></div>
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <p>Total: RM<span id="cart-total">0.00</span></p>
+                <a href="shop.html" class="continue-shopping-btn" style="color: white;">Continue Shopping</a>
+                <a href="#" class="checkout-btn" style="color: white;">Proceed to Checkout</a>
+            </div>
+        </div>
+        <div id="empty-cart-message" class="empty-cart">
+            Your cart is empty. <a href="shop.html">Shop now</a>.
+        </div>
+        <div id="debug-output" style="color: red;"></div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> 450A Jalan Berjaya Lorong 32 Penang, 31010 Malaysia</p>
+            <p><strong>Phone:</strong> +6015 2223345 / +05 28105</p>
+            <p><strong>Hours:</strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>from App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.png" alt="">
+                <img src="img/pay/play.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
+    <script src="cartIndicator.js" defer></script>
+    <script src="header.js" defer></script>
+    <script>
+        // Function to get cookies
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
+            return null;
+        }
+
+        // Function to set cookies
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
+        }
+
+        // Function to fetch products from products.json
+        async function fetchProducts() {
+            try {
+                const response = await fetch('products.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const products = await response.json();
+                return products;
+            } catch (error) {
+                document.getElementById("debug-output").textContent = `Error: ${error.message}. Check products.json path or content.`;
+                return [];
+            }
+        }
+
+        // Load cart from cookies
+        async function loadCart() {
+            const cart = getCookie("cart");
+            const cartItems = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+            const emptyCartMessage = document.getElementById("empty-cart-message");
+            const debugOutput = document.getElementById("debug-output");
+            let total = 0;
+            const products = await fetchProducts();
+
+            debugOutput.textContent = ""; // Clear debug output
+
+            if (!cart || cart.trim() === "") {
+                emptyCartMessage.style.display = "block";
+                cartItems.style.display = "block";
+                cartTotal.textContent = "0.00";
+                updateCartIndicator();
+                return;
+            }
+
+            let cartData;
+            try {
+                cartData = JSON.parse(cart);
+                if (!Array.isArray(cartData)) {
+                    throw new Error("Cart data is not an array");
+                }
+            } catch (e) {
+                debugOutput.textContent = `Error: Invalid cart data - ${e.message}. Resetting cart.`;
+                setCookie("cart", "[]", 7);
+                emptyCartMessage.style.display = "block";
+                cartItems.style.display = "block";
+                cartTotal.textContent = "0.00";
+                updateCartIndicator();
+                return;
+            }
+
+            emptyCartMessage.style.display = "none";
+            cartItems.style.display = "block";
+            cartItems.innerHTML = "";
+            let itemsRendered = 0;
+
+            cartData.forEach((item, index) => {
+                const product = products.find(p => p.id === item.id);
+                if (product) {
+                    const itemTotal = (product.price || 0) * (item.quantity || 1);
+                    total += itemTotal;
+                    cartItems.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${product.image || 'img/placeholder.jpg'}" alt="${product.name || 'Unknown Product'}">
+                            <div class="item-details">
+                                <h4>${product.name || 'Unnamed Product'}</h4>
+                                <p>Price: RM${(product.price || 0).toFixed(2)}</p>
+                                <p>Size: ${item.size}</p>
+                                <p>Quantity: <input type="number" value="${item.quantity || 1}" min="1" onchange="updateQuantity(${index}, this.value)"></p>
+                                <p>Total: RM${itemTotal.toFixed(2)}</p>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    `;
+                    itemsRendered++;
+                } else {
+                    debugOutput.textContent += `Warning: Product ID ${item.id} not found. `;
+                }
+            });
+
+            if (itemsRendered === 0) {
+                debugOutput.textContent = "Warning: No matching products found for cart items.";
+                emptyCartMessage.style.display = "block";
+            }
+            cartTotal.textContent = total.toFixed(2);
+            updateCartIndicator();
+        }
+
+        // Update quantity
+        function updateQuantity(index, quantity) {
+            let cart = getCookie("cart");
+            if (cart) {
+                cart = JSON.parse(cart);
+                if (index >= 0 && index < cart.length) {
+                    cart[index].quantity = parseInt(quantity) || 1;
+                    setCookie("cart", JSON.stringify(cart), 7);
+                    loadCart();
+                    updateCartIndicator();
+                }
+            }
+        }
+
+        // Remove item from cart
+        function removeItem(index) {
+            let cart = getCookie("cart");
+            if (cart) {
+                cart = JSON.parse(cart);
+                if (index >= 0 && index < cart.length) {
+                    cart.splice(index, 1);
+                    setCookie("cart", JSON.stringify(cart), 7);
+                    loadCart();
+                    updateCartIndicator();
+                }
+            }
+        }
+
+        // Load cart on page load
+        window.onload = loadCart;
+    </script>
+</body>
+</html>

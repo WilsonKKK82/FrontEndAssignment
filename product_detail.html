@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Niku Sdn Bhd</title>
+    <link rel="stylesheet" href="product_detail.css">
+    <link rel="stylesheet" href="Header_Footer.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+        <div>
+            <ul id="navBar">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="cart"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li id="authNavItem"></li>
+                <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <section id="product-detail" class="section-p1">
+        <nav class="breadcrumbs">
+            <a href="index.html">Home</a> &gt;
+            <a href="shop.html">Shop</a> &gt;
+            <a href="shop.html?category=Running" id="breadcrumb-category"></a> &gt;
+            <span id="breadcrumb-product"></span>
+        </nav>
+        <div class="product-container">
+            <div class="product-image">
+                <img id="product-image" src="" alt="Product Image">
+            </div>
+            <div class="product-info">
+                <h2 id="product-name"></h2>
+                <p id="product-brand"></p>
+                <p id="product-price"></p>
+                <p id="product-category"></p>
+                <p id="product-rating"></p>
+                <p id="product-description"></p>
+                <div class="product-options">
+                    <label for="product-size">Size:</label>
+                    <select id="product-size" required>
+                        <option value="">Select Size</option>
+                    </select>
+                    <label for="product-quantity">Quantity:</label>
+                    <input type="number" id="product-quantity" min="1" value="1">
+                </div>
+                <p id="product-stock"></p>
+                <button id="add-to-cart" class="cart-button">Add to Cart</button>
+                <button id="view-cart" class="cart-button" style="display: none; margin-top: 10px;">View Cart</button>
+                <div class="share-buttons">
+                    <a href="#" id="share-facebook" class="share-btn"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" id="share-twitter" class="share-btn"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" id="share-whatsapp" class="share-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="related-products">
+            <h3>You May Also Like</h3>
+            <div class="related-products-container" id="related-products-container"></div>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> 450A Jalan Berjaya Lorong 32 Penang, 31010 Malaysia</p>
+            <p><strong>Phone:</strong> +6015 2223345 / +05 28105</p>
+            <p><strong>Hours:</strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>from App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.png" alt="">
+                <img src="img/pay/play.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
+    <script src="cartIndicator.js" defer></script>
+    <script>
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get("id");
+        console.log("URL product ID:", productId, "Type:", typeof productId);
+
+        // Fetch product details
+        async function fetchProduct() {
+            console.log("Fetching products.json for product ID:", productId);
+            try {
+                const response = await fetch('products.json');
+                console.log("Fetch response:", response);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const products = await response.json();
+                console.log("Fetched products:", products);
+                console.log("Number of products:", products.length);
+                const product = products.find(p => p.id === parseInt(productId));
+                console.log("Found product:", product);
+
+                if (!product) {
+                    console.log("No product found for ID:", productId);
+                    document.getElementById("product-detail").innerHTML = "<p>Product not found. Invalid ID or missing product in products.json.</p>";
+                    return;
+                }
+
+                // Related Products
+                const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+                document.getElementById("related-products-container").innerHTML = relatedProducts.map(p => `
+                    <div class="related-product-card">
+                        <img src="${p.image || 'img/placeholder.jpg'}" alt="${p.name}">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-brand">${p.brand}</div>
+                        <div class="product-price">RM${p.price.toFixed(2)}</div>
+                        <a href="product_detail.html?id=${p.id}" class="cart-button">View More</a>
+                    </div>
+                `).join("");
+
+                // Back Button/Breadcrumbs
+                document.getElementById("breadcrumb-category").textContent = product.category;
+                document.getElementById("breadcrumb-category").href = `shop.html?category=${product.category}`;
+                document.getElementById("breadcrumb-product").textContent = product.name;
+
+                // Populate product details
+                document.getElementById("product-image").src = product.image;
+                document.getElementById("product-image").alt = product.name;
+                document.getElementById("product-name").textContent = product.name;
+                document.getElementById("product-brand").textContent = `Brand: ${product.brand}`;
+                document.getElementById("product-price").textContent = `RM${product.price.toFixed(2)}`;
+                document.getElementById("product-category").textContent = `Category: ${product.category}`;
+                document.getElementById("product-rating").innerHTML = `${"★".repeat(product.rating)}<span class="empty-star">${"☆".repeat(5 - product.rating)}</span>`;
+                document.getElementById("product-description").textContent = product.description;
+                document.getElementById("product-stock").textContent = `Stock: ${product.stock} available`;
+
+                // Social share links
+                const productUrl = window.location.href;
+                const productName = encodeURIComponent(product.name);
+                document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${productUrl}`;
+                document.getElementById("share-twitter").href = `https://twitter.com/intent/tweet?url=${productUrl}&text=${productName}`;
+                document.getElementById("share-whatsapp").href = `https://api.whatsapp.com/send?text=${productName}%20${productUrl}`;
+                
+                // Populate size dropdown
+                const sizeSelect = document.getElementById("product-size");
+                sizeSelect.innerHTML = '<option value="">Select Size</option>' + 
+                    product.sizes.map(size => `<option value="${size}">${size}</option>`).join("");
+
+                // Add to cart functionality
+                document.getElementById("add-to-cart").addEventListener("click", () => {
+                    const size = document.getElementById("product-size").value;
+                    const quantity = parseInt(document.getElementById("product-quantity").value);
+                    if (!size) {
+                        alert("Please select a size.");
+                        return;
+                    }
+                    if (quantity < 1 || quantity > product.stock) {
+                        alert(`Please select a valid quantity (1 to ${product.stock}).`);
+                        return;
+                    }
+
+                    // Get or initialize cart from cookies
+                    let cart = getCookie("cart");
+                    if (!cart) cart = [];
+                    else cart = JSON.parse(cart);
+                    const existingItem = cart.find(item => item.id === parseInt(productId) && item.size === parseInt(size));
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                        if (existingItem.quantity > product.stock) {
+                            alert(`Cannot add ${existingItem.quantity} items. Only ${product.stock} in stock.`);
+                            return;
+                        }
+                    } else {
+                        cart.push({ id: parseInt(productId), size: parseInt(size), quantity });
+                    }
+
+                    // Save cart to cookie and update cart indicator
+                    setCookie("cart", JSON.stringify(cart), 7);
+                    alert(`${product.name} (Size ${size}, Quantity ${quantity}) added to cart!`);
+                    updateCartIndicator();
+                    document.getElementById("view-cart").style.display = "block"; // Show View Cart button
+                });
+            } catch (error) {
+                console.error("Error fetching products.json:", error);
+                document.getElementById("product-detail").innerHTML = "<p>Error loading product details. Please check the console for details.</p>";
+            }
+        }
+
+        // Cookie functions
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
+            return null;
+        }
+
+        // View Cart functionality
+        document.getElementById("view-cart").addEventListener("click", () => {
+            window.location.href = "cart.html";
+        });
+
+        // Initialize page
+        console.log("Initializing product_detail.html");
+        fetchProduct();
+    </script>
+</body>
+</html>

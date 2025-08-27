@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="Header_Footer.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+</header>
+
+<body>
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="logo" alt="" width="100px"></a>
+
+        <div>
+            <ul id="navBar">
+                <li><a class="active" href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li id="cart"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+                <li id="authNavItem"></li>
+                <a href="#" id="close"><i class="fas fa-window-close"></i></a>
+
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <section id="hero">
+        <h1>New arrivals</h1>
+        <h2>Collection 2025</h2>
+        <h3>Super value deals</h3>
+        <h5>On all products</h5>
+        <button><a href="shop.html">Shop Now</a></button>
+    </section>
+
+    <section id="product1" class="section-p1">
+        <h2>Featured Products</h2>
+        <p>Summer Collection New Modern Design</p>
+        <div class="pro-container">
+            <div class="pro">
+                <img src="img/products-category/running.png" alt="">
+                <div class="des">
+                    <span>Niku</span>
+                    <h5>Running Series</h5>
+                    <a href="shop.html?category=Running">
+                        <h4>View More</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="pro">
+                <img src="img/products-category/lifestyle.png" alt="">
+                <div class="des">
+                    <span>Niku</span>
+                    <h5>Casual Series</h5>
+                    <a href="shop.html?category=Casual">
+                        <h4>View More</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="pro">
+                <img src="img/products-category/basketball.png" alt="">
+                <div class="des">
+                    <span>Niku</span>
+                    <h5>Basketball Series</h5>
+                    <a href="shop.html?category=Basketball">
+                        <h4>View More</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="pro">
+                <img src="img/products-category/football.png" alt="">
+                <div class="des">
+                    <span>Niku</span>
+                    <h5>Football Series</h5>
+                    <a href="shop.html?category=Football">
+                        <h4>View More</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="best-sellers" class="section-p1">
+        <h2>Best Sellers</h2>
+        <p>Our most popular shoes this season</p>
+
+        <div class="best_seller-container">
+            <button class="prev">&#10094;</button>
+            <div class="best_seller">
+                <div class="best_seller_slide">
+                    <img src="img/shoe1.jpg" alt="Best Seller 1">
+                    <h4>Air Runner Pro</h4>
+                    <p>RM288.00</p>
+                </div>
+                <div class="best_seller_slide">
+                    <img src="img/shoe2.jpg" alt="Best Seller 2">
+                    <h4>MetroFlex</h4>
+                    <p>RM79.00</p>
+                </div>
+                <div class="best_seller_slide">
+                    <img src="img/shoe3.jpg" alt="Best Seller 3">
+                    <h4>BounceNova</h4>
+                    <p>RM118.00</p>
+                </div>
+                <div class="best_seller_slide">
+                    <img src="img/shoe4.jpg" alt="Best Seller 4">
+                    <h4>EliteCore Cleats</h4>
+                    <p>RM130.00</p>
+                </div>
+            </div>
+            <button class="next">&#10095;</button>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> 450A Jalan Berjaya Lorong 32 Penang, 31010 Malaysia</p>
+            <p><strong>Phone: </strong> +6015 2223345 / +05 28105 </p>
+            <p><strong>Hours: </strong> Mon - Sat: 10:00 AM - 6:00 PM</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>from App Store or Google Play</p>
+            <div class="row">
+                <img src="img/pay/app.png  " alt="">
+                <img src="img/pay/play.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2025, Niku Sdn Bhd - E-Commerce Website</p>
+        </div>
+    </footer>
+</body>
+
+<script src="cartIndicator.js" defer></script>
+<script src="https://kit.fontawesome.com/e94533517f.js" crossorigin="anonymous"></script>
+<script src="header.js" defer></script>
+<script>
+    let best_seller = document.querySelector('.best_seller');
+    let slides = document.querySelectorAll('.best_seller_slide');
+    let index = 0;
+
+    document.querySelector('.next').addEventListener('click', () => {
+        index++;
+        if (index > slides.length - 2) { // loop back when reaching end
+            index = 0;
+        }
+        best_seller.style.transform = `translateX(-${index * 50}%)`;
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        index--;
+        if (index < 0) { // loop to end when going backward
+            index = slides.length - 2;
+        }
+        best_seller.style.transform = `translateX(-${index * 50}%)`;
+    });
+
+</script>
+
+</html>
