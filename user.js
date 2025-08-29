@@ -416,7 +416,6 @@ function loadWishlist() {
 }
 
 function addToCartFromWishlist(productId) {
-    // In a real application, this would add the product to cart
     // For now, we'll just show a message
     showNotification('Product added to cart!', 'success');
 }
@@ -573,9 +572,7 @@ function changePassword() {
         return;
     }
 
-    // In a real application, this would verify the current password with the server
     // For demo purposes, we'll just show a success message
-
     // Hide form and reset
     document.getElementById('password-form-container').style.display = 'none';
     document.getElementById('change-password-btn').style.display = 'block';
@@ -663,4 +660,5 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
     return null;
+
 }
