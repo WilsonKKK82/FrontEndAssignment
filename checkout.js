@@ -130,7 +130,6 @@ function setupFormNavigation() {
     document.querySelectorAll('.btn-back').forEach(button => {
         button.addEventListener('click', function() {
             if (this.getAttribute('onclick')) {
-                // If button has onclick attribute, let it handle the navigation
                 return;
             }
             
@@ -208,7 +207,6 @@ function validateForm(form) {
         
         // Special validation for credit card if payment form
         if (form.id === 'payment-form' && input.name === 'card-number' && input.value.trim()) {
-            // Simple Luhn algorithm check for valid card number
             if (!isValidCardNumber(input.value)) {
                 input.style.borderColor = '#dc3545';
                 isValid = false;
@@ -232,7 +230,6 @@ function isValidCardNumber(cardNumber) {
         return false;
     }
     
-    // Luhn algorithm
     let sum = 0;
     let shouldDouble = false;
     
@@ -260,7 +257,6 @@ function saveFormData(form) {
         }
     });
     
-    // Save to localStorage (in a real app, this would be handled more securely)
     const currentData = JSON.parse(localStorage.getItem('checkoutData')) || {};
     const step = form.id.split('-')[0];
     currentData[step] = formData;
@@ -335,7 +331,6 @@ function populateReviewInformation() {
 }
 
 function applyPromoCode(promoCode) {
-    // In a real application, this would validate against a server
     // For demo purposes, we'll use a simple check
     const discountCodes = {
         'NIKU10': 0.1,  // 10% discount
@@ -410,19 +405,12 @@ function placeOrder() {
         return;
     }
     
-    // In a real application, this would send the order to a server
-    // For demo purposes, we'll simulate a successful order
-    
     // Clear cart
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     
     // Show success message
     alert('Order placed successfully! Thank you for your purchase.');
     
-    // Redirect to order confirmation page (which doesn't exist yet in this example)
-    // window.location.href = 'order-confirmation.html';
-    
-    // For now, redirect to home page
     window.location.href = 'index.html';
 }
 
@@ -435,4 +423,5 @@ document.addEventListener('DOMContentLoaded', function() {
             placeOrder();
         });
     }
+
 });
